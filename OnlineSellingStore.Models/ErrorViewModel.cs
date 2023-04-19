@@ -1,4 +1,4 @@
-namespace OnlineSellingStoreWeb.Models
+namespace OnlineSellingStore.Models
 {
     public class ErrorViewModel
     {
