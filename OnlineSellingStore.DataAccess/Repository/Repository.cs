@@ -54,7 +54,7 @@ namespace OnlineSellingStore.DataAccess.Repository
                     Split(new char[] {',' }, StringSplitOptions.
                     RemoveEmptyEntries))
                 { 
-                    query.Include(property);
+                    query = query.Include(property);
                 }
             }
             return query.ToList();
