@@ -12,10 +12,13 @@ namespace OnlineSellingStore.DataAccess.Repository
     {
         private ApplicationDbContext _db;
         public ICategoryRepository Category { get; set; }
+        public IProductRepository Product { get; set; }
+
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
             Category = new CategoryRepository(_db);
+            Product = new ProductRepository(_db);
         }
 
         public void Save()

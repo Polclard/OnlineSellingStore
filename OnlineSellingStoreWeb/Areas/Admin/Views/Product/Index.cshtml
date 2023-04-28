@@ -1,0 +1,74 @@
+﻿@model List<Product>
+
+<!--
+        public int Id { get; set; }
+        
+        
+        public string Title { get; set;  }
+        public string Description { get; set; 
+        public string ISBN { get; set; 
+        public string Author { get; set; 
+        public double ListPrice { get; set; 
+        public double Price { get; set; }
+        public double Price50 { get; set; }
+        public double Price100 { get; set; }
+-->
+
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-primary bg-gradient m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Products</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="container">
+    <div class="row pt-4 pb-4">
+        <div class="col-6">
+ 
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Product" asp-action="Upsert" class="btn btn-primary">
+                <i class="bi bi-plus-circle-fill"></i> Create New Product
+            </a>
+        </div>
+    </div>
+
+    <div style="overflow-x:auto;" class="pb-4">
+         <table id="tblData" class="table table-primary table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Product Title
+                </th>
+                <th>
+                    Product ISBN
+                </th>
+                <th>
+                    Product Price
+                </th>
+               <th>
+                    Product Author
+                </th>
+                <td>
+                    Category
+                </td>
+                <th>
+                    Functionality
+                </th>
+            </tr>
+        </thead>
+ 
+    </table>
+    </div>
+   
+</div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/js/product.js"></script>
+}
