@@ -35,16 +35,15 @@ namespace OnlineSellingStoreWeb.Areas.Admin.Controllers
             
         public IActionResult Upsert(int? id)
         {
-
             //ViewBag.CategoryList = CategoryList;
             //ViewData["CategoryList"] = CategoryList;
             ProductVM productVM = new()
             {
                 CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
-                    {
-                        Text = u.Name,
-                        Value = u.Id.ToString()
-                    }),
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                }),
 
                 Product = new Product()
             };
@@ -96,7 +95,6 @@ namespace OnlineSellingStoreWeb.Areas.Admin.Controllers
                 }
                 else
                 {
-
                     _unitOfWork.Product.Update(productVM.Product);
                 }
                 _unitOfWork.Save();
