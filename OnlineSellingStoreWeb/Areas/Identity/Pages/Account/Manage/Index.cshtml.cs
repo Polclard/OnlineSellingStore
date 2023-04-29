@@ -7,15 +7,18 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using OnlineSellingStore.Models;
 
 namespace OnlineSellingStoreWeb.Areas.Identity.Pages.Account.Manage
 {
     public class IndexModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
         public IndexModel(
             UserManager<IdentityUser> userManager,
@@ -58,24 +61,40 @@ namespace OnlineSellingStoreWeb.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [Required]
+            [Display(Name = "Full Name")]
+            public string Name { get; set; }
+            [Display(Name = "Street Address")]
+            public string? StreetAddress { get; set; }
+            public string? City { get; set; }
+            public string? State { get; set; }
+            [Display(Name = "Postal Code")]
+            public string? PostalCode { get; set; }
         }
 
-        private async Task LoadAsync(IdentityUser user)
+        private async Task LoadAsync(ApplicationUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+
 
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                Name = user.Name,
+                StreetAddress = user.StreetAddress,
+                City = user.City,
+                State = user.State,
+                PostalCode = user.PostalCode
             };
         }
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var user = await _userManager.GetUserAsync(User);
+            var user = (ApplicationUser)await _userManager.GetUserAsync(User);
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -87,7 +106,7 @@ namespace OnlineSellingStoreWeb.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var user = await _userManager.GetUserAsync(User);
+            var user = (ApplicationUser)await _userManager.GetUserAsync(User);
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -95,9 +114,9 @@ namespace OnlineSellingStoreWeb.Areas.Identity.Pages.Account.Manage
 
             if (!ModelState.IsValid)
             {
-                await LoadAsync(user);
+                await LoadAsync((ApplicationUser)user);
                 return Page();
-            }
+            }    
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)
@@ -109,6 +128,49 @@ namespace OnlineSellingStoreWeb.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
+
+
+
+            /* 
+             *  PhoneNumber = phoneNumber,
+             *  Name = name,
+             *  StreetAddress = address,
+             *  City = city,
+             *  State = state,
+             *  PostalCode = postalCode
+            */
+
+            if (Input.Name != user.Name)
+            {
+                user.Name = Input.Name;
+            }
+
+            if (Input.PhoneNumber != user.PhoneNumber)
+            {
+                user.PhoneNumber = Input.PhoneNumber;
+            }
+
+            if (Input.StreetAddress != user.StreetAddress)
+            {
+                user.StreetAddress = Input.StreetAddress;
+            }
+
+            if (Input.City != user.City)
+            {
+                user.City = Input.City;
+            }
+
+            if (Input.State != user.State)
+            {
+                user.State = Input.State;
+            }
+            
+            if (Input.PostalCode != user.PostalCode)
+            {
+                user.PostalCode = Input.PostalCode;
+            }
+
+            await _userManager.UpdateAsync(user); //Added by me to update the data for the user
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

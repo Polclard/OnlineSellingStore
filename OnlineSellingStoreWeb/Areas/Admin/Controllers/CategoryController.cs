@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 using OnlineSellingStore.DataAccess.Data;
 using OnlineSellingStore.DataAccess.Repository.IRepository;
 using OnlineSellingStore.Models;
+using OnlineSellingStore.Utility;
 
 namespace OnlineSellingStoreWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfwork;

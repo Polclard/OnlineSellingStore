@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -6,11 +7,13 @@ using Microsoft.Extensions.Logging.Abstractions;
 using OnlineSellingStore.DataAccess.Repository.IRepository;
 using OnlineSellingStore.Models;
 using OnlineSellingStore.Models.ViewModels;
+using OnlineSellingStore.Utility;
 using System.Collections.Immutable;
 
 namespace OnlineSellingStoreWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class ProductController : Controller
     {
 
