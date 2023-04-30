@@ -28,7 +28,7 @@
                             <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Index"><i class="bi bi-house"></i> Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Privacy"><i class="bi bi-shield"></i> Privacy</a>
+                            <a class="nav-link" asp-area="Admin" asp-controller="Order" asp-action="Index"><i class="bi bi-shield"></i> Manage Order</a>
                         </li>
 
                         @if(User.IsInRole(SD.Role_Admin))
