@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineSellingStore.DataAccess.Repository;
 using OnlineSellingStore.DataAccess.Repository.IRepository;
 using OnlineSellingStore.Models;
+using OnlineSellingStore.Utility;
 using System.Diagnostics;
 using System.Security.Claims;
 
@@ -52,18 +54,25 @@ namespace OnlineSellingStoreWeb.Areas.Customer.Controllers
             {
                 //shopping cart exists
                 cartFromDb.Count += shoppingCart.Count;
+
                 _unitofWork.ShoppingCart.Update(cartFromDb);
+                _unitofWork.Save();
             }
             else
             {
                 //add cart record
                 _unitofWork.ShoppingCart.Add(shoppingCart);
+                _unitofWork.Save();
+
+                HttpContext.Session.SetInt32(SD.SessionCart,
+                _unitofWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId).Count());
             }
+
+
 
             TempData["success"] = "Cart updated successfully";
 
 
-            _unitofWork.Save();
             return RedirectToAction(nameof(Index));
         }
 

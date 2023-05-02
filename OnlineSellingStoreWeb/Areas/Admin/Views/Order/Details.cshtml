@@ -1,10 +1,11 @@
 ﻿@model OrderVM
 
 <form method="post">
+    <input hidden asp-for="OrderHeader.Id" />
     <br />
     <div class="container">
         <div class="card">
-            <div class="card-header bg-dark text-light ml-0">
+            <div class="card-header bg-primary text-light ml-0">
                 <div class="container row">
                     <div class="col-12 d-none d-md-block col-md-6 pb-1">
                         <i class="fa fa-shopping-cart"></i>  &nbsp; Order Summary
@@ -33,7 +34,7 @@
                                     }
                                     else
                                     {
-                                         <input asp-for="@Model.OrderHeader.Name" readonly type="text" class="form-control" />
+                                         <input asp-for="@Model.OrderHeader.Name" readonly style="background: rgba(0, 0, 0, 0.1)" type="text" class="form-control" />
                                     }
                                 </div>
                             </div>
@@ -47,7 +48,7 @@
                                     }
                                     else
                                     {
-                                         <input  readonly asp-for="@Model.OrderHeader.PhoneNumber" type="text" class="form-control" />
+                                         <input  readonly style="background: rgba(0, 0, 0, 0.1)" asp-for="@Model.OrderHeader.PhoneNumber" type="text" class="form-control" />
                                     }
                                     
                                 </div>
@@ -62,7 +63,7 @@
                                     }
                                     else
                                     {
-                                         <input  readonly asp-for="@Model.OrderHeader.StreetAddress" type="text" class="form-control" />
+                                         <input  readonly style="background: rgba(0, 0, 0, 0.1)" asp-for="@Model.OrderHeader.StreetAddress" type="text" class="form-control" />
                                     }
                                 </div>
                             </div>
@@ -76,7 +77,7 @@
                                     }
                                     else
                                     {
-                                         <input  readonly asp-for="@Model.OrderHeader.City" type="text" class="form-control" />
+                                         <input  readonly style="background: rgba(0, 0, 0, 0.1)" asp-for="@Model.OrderHeader.City" type="text" class="form-control" />
                                     }
                                 </div>
                             </div>
@@ -90,7 +91,7 @@
                                     }
                                     else
                                     {
-                                         <input  readonly asp-for="@Model.OrderHeader.State" type="text" class="form-control" />
+                                         <input  readonly style="background: rgba(0, 0, 0, 0.1)" asp-for="@Model.OrderHeader.State" type="text" class="form-control" />
                                     }
                                 </div>
                             </div>
@@ -104,20 +105,20 @@
                                     }
                                     else
                                     {
-                                         <input  readonly asp-for="@Model.OrderHeader.PostalCode" type="text" class="form-control" />
+                                         <input  readonly style="background: rgba(0, 0, 0, 0.1)" asp-for="@Model.OrderHeader.PostalCode" type="text" class="form-control" />
                                     }
                                 </div>
                             </div>
                             <div class="row my-1">
                                 <div class="col-3">Email</div>
                                 <div class="col-9">
-                                    <input  readonly asp-for="@Model.OrderHeader.ApplicationUser.Email" type="text" class="form-control" />
+                                    <input  readonly style="background: rgba(0, 0, 0, 0.1)" asp-for="@Model.OrderHeader.ApplicationUser.Email" type="text" class="form-control" />
                                 </div>
                             </div>
                             <div class="row my-1">
                                 <div class="col-3">Order Date</div>
                                 <div class="col-9">
-                                        <input  readonly asp-for="@Model.OrderHeader.OrderDate" type="text" class="form-control" />
+                                        <input  readonly style="background: rgba(0, 0, 0, 0.1)" asp-for="@Model.OrderHeader.OrderDate" type="text" class="form-control" />
                                 </div>
                             </div>
                             <div class="row my-1">
@@ -125,11 +126,11 @@
                                 <div class="col-9">
                                     @if(User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee))
                                     {
-                                        <input asp-for="@Model.OrderHeader.Carrier" type="text" class="form-control" />
+                                        <input asp-for="@Model.OrderHeader.Carrier" id="carrier" type="text" class="form-control" />
                                     }
                                     else
                                     {
-                                         <input  readonly asp-for="@Model.OrderHeader.Carrier" type="text" class="form-control" />
+                                         <input  readonly style="background: rgba(0, 0, 0, 0.1)" asp-for="@Model.OrderHeader.Carrier" type="text" class="form-control" />
                                     }
                                 </div>
                             </div>
@@ -138,18 +139,18 @@
                                 <div class="col-9">
                                     @if(User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee))
                                     {
-                                        <input asp-for="@Model.OrderHeader.TrackingNumber" type="text" class="form-control" />
+                                        <input asp-for="@Model.OrderHeader.TrackingNumber" type="text" id="trackingNumber" class="form-control" />
                                     }
                                     else
                                     {
-                                         <input  readonly asp-for="@Model.OrderHeader.TrackingNumber" type="text" class="form-control" />
+                                         <input  readonly style="background: rgba(0, 0, 0, 0.1)" asp-for="@Model.OrderHeader.TrackingNumber" type="text" class="form-control" />
                                     }
                                 </div>
                             </div>
                             <div class="row my-1">
                                 <div class="col-3">Shipping Date</div>
                                 <div class="col-9">
-                                    <input  readonly asp-for="@Model.OrderHeader.ShippingDate" type="text" class="form-control" />
+                                    <input  readonly style="background: rgba(0, 0, 0, 0.1)" asp-for="@Model.OrderHeader.ShippingDate" type="text" class="form-control" />
                                 </div>
                             </div>
 
@@ -158,13 +159,13 @@
                                 <div class="row my-1">
                                     <div class="col-3">Session ID</div>
                                     <div class="col-9"> 
-                                        <input  readonly asp-for="@Model.OrderHeader.SessionId" type="text" class="form-control" />
+                                        <input  readonly style="background: rgba(0, 0, 0, 0.1)" asp-for="@Model.OrderHeader.SessionId" type="text" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="row my-1">
                                     <div class="col-3">Payment Intent ID</div>
                                     <div class="col-9">
-                                        <input  readonly asp-for="@Model.OrderHeader.PaymentIntentId" type="text" class="form-control" />
+                                        <input  readonly style="background: rgba(0, 0, 0, 0.1)" asp-for="@Model.OrderHeader.PaymentIntentId" type="text" class="form-control" />
                                     </div>
                                 </div>                              
                             }
@@ -175,14 +176,14 @@
                                 {     
                                     <div class="col-3">Payment Due Date</div>
                                     <div class="col-9">
-                                        <input  readonly asp-for="@Model.OrderHeader.PaymentDueDate" type="text" class="form-control" />
+                                        <input  readonly style="background: rgba(0, 0, 0, 0.1)" asp-for="@Model.OrderHeader.PaymentDueDate" type="text" class="form-control"/>
                                     </div>
                                 }
                                 else
                                 {
                                     <div class="col-3">Payment Date</div>
                                     <div class="col-9">
-                                        <input  readonly asp-for="@Model.OrderHeader.PaymentDate" type="text" class="form-control" />
+                                        <input  readonly style="background: rgba(0, 0, 0, 0.1)" asp-for="@Model.OrderHeader.PaymentDate" type="text" class="form-control" />
                                     </div>
                                     
                                 }
@@ -193,10 +194,14 @@
                             <div class="row my-1">
                                 <div class="col-3">Payment Status</div>
                                 <div class="col-9">
-                                     <input  readonly asp-for="@Model.OrderHeader.PaymentStatus" type="text" class="form-control" />
+                                     <input  readonly style="background: rgba(0, 0, 0, 0.1);" asp-for="@Model.OrderHeader.PaymentStatus" type="text" class="form-control" />
                                 </div>
                             </div>
-                            <input type="submit" class="btn btn-warning form-control my-1" value="Update Order Details" />
+
+                            @if(User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee))
+                            {
+                                <button asp-action="UpdateOrderDetail" type="submit" class="btn btn-warning form-control my-1" >Update Order Details</button>
+                            }
 
                         </div>
                         <div class="col-12 col-lg-5 offset-lg-1">
@@ -235,10 +240,28 @@
                                     </div>
                                 </li>
                             </ul>
-                            <input type="submit" class="btn btn-success form-control my-1" value="Pay Now" />
-                            <input type="submit" class="btn btn-primary form-control my-1" value="Start Processing" />
-                            <input type="submit" class="btn btn-primary form-control my-1" value="Ship Order" />
-                            <input type="submit" class="btn btn-danger form-control my-1" value="Cancel Order" />
+                            @if(Model.OrderHeader.PaymentStatus == SD.PaymentStatusDelayedPayment &&
+                            Model.OrderHeader.OrderStatus == SD.StatusShipped)
+                            {
+                                <button type="submit" class="btn btn-success form-control my-1">Pay Now</button>
+                            }
+                            @if(User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee))
+                            {
+                                if(Model.OrderHeader.OrderStatus == SD.StatusApproved)
+                                {
+                                    <button asp-action="StartProcessing" type="submit" class="btn btn-primary form-control my-1">Start Processing</button>
+                                }
+                                if(Model.OrderHeader.OrderStatus == SD.StatusProccess)
+                                {
+                                    <button asp-action="ShipOrder" type="submit" onclick="return validateInput()" class="btn btn-primary form-control my-1">Ship Order</button>
+                                }
+                                if(Model.OrderHeader.OrderStatus != SD.StatusRefunded &&
+                                Model.OrderHeader.OrderStatus != SD.StatusCancelled &&
+                                Model.OrderHeader.OrderStatus != SD.StatusShipped)
+                                {
+                                    <button asp-action="CancelOrder" type="submit" class="btn btn-danger form-control my-1">Cancel Order</button>
+                                }
+                            }
                         </div>
                     </div>
                 </div>
@@ -246,3 +269,29 @@
         </div>
     </div>
 </form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"\>
+
+    <script>
+        function validateInput(){
+            if(document.getElementById("trackingNumber").value == ""){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please enter tracking number!',
+                });
+                return false;
+            }
+            if(document.getElementById("carrier").value == ""){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please enter carrier!',
+                });
+                return false;
+            }
+            return true;
+        }
+    </script>
+}
