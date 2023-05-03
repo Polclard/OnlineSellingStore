@@ -13,7 +13,7 @@ namespace OnlineSellingStore.Models
     public class Product
     {
         [Key]
-        public int Id { get; set; }
+        public int? Id { get; set; }
         [Required]
         [DisplayName("Product Name")]
         public string Title { get; set;  }

@@ -4,13 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineSellingStore.DataAccess.Repository;
 using OnlineSellingStore.DataAccess.Repository.IRepository;
 using OnlineSellingStore.Models;
+using OnlineSellingStore.Models.ViewModels;
 using OnlineSellingStore.Utility;
 using System.Diagnostics;
 using System.Security.Claims;
 
 namespace OnlineSellingStoreWeb.Areas.Customer.Controllers
 {
-    [Area("Customer")]
+    [Area("Customer")] 
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -25,6 +26,9 @@ namespace OnlineSellingStoreWeb.Areas.Customer.Controllers
         public IActionResult Index()
         {
             IEnumerable<Product> productsList = _unitofWork.Product.GetAll(includeProperties: "Category");
+
+            calculateItemsInShoppingCart();
+
             return View(productsList);
         }
 
@@ -79,6 +83,23 @@ namespace OnlineSellingStoreWeb.Areas.Customer.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public void calculateItemsInShoppingCart()
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+
+            if (claimsIdentity.IsAuthenticated == true)
+            {
+                var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+                HttpContext.Session.SetInt32(SD.SessionCart,
+                    _unitofWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId).Count());
+            }
+            else
+            {
+                HttpContext.Session.SetInt32(SD.SessionCart, 0);
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

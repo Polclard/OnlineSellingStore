@@ -8,6 +8,7 @@ using OnlineSellingStore.Utility;
 using OnlineSellingStore.Models;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Stripe;
+using OnlineSellingStore.DataAccess.DbInitializer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,9 +38,15 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+builder.Services.AddAuthentication().AddFacebook(options =>
+{
+    options.AppId = "145202791716845";
+    options.AppSecret = "b4a36de7c4613de7319438faada89277";
+});
+
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -59,9 +66,19 @@ app.UseRouting();
 app.UseAuthentication();    
 app.UseAuthorization();
 app.UseSession();
+SeedDatabase();
 app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+void SeedDatabase()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+        dbInitializer.Initialize();
+    }
+}

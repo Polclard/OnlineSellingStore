@@ -31,7 +31,7 @@ namespace OnlineSellingStoreWeb.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(Category obj)
         {
-            if (obj != null && obj.Name != null && obj.DisplayOrder != null)
+            if (obj != null && obj.Name != null && obj.DisplayOrder != 0)
             {
                 if (obj.Name.ToLower() == obj.DisplayOrder.ToString())
                 {
@@ -50,7 +50,7 @@ namespace OnlineSellingStoreWeb.Areas.Admin.Controllers
                 }
             }
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && obj != null)
             {
                 _unitOfwork.Category.Add(obj);
                 _unitOfwork.Save();

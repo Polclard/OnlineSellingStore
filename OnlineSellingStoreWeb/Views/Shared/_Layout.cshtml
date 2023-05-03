@@ -45,36 +45,35 @@
                                             <a class="dropdown-item" asp-area="Admin" asp-controller="Category" asp-action="Index"><i class="bi bi-tags"></i> Category</a>
                                          </li>
 
-                                         <li><hr class="dropdown-divider"></li>
-
                                          <li class="nav-item">
                                             <a class="dropdown-item" asp-area="Admin" asp-controller="Product" asp-action="Index"><i class="bi bi-tags"></i> Product</a>
                                          </li>
 
+                                        <li class="nav-item">
+                                            <a class="dropdown-item" asp-area="Admin" asp-controller="Company" asp-action="Index"><i class="bi bi-tags"></i> Company</a>
+                                        </li>
+                                        
                                         <li><hr class="dropdown-divider"></li>
 
                                         <li class="nav-item">
-                                            <a class="dropdown-item" asp-area="Admin" asp-controller="Company" asp-action="Index"><i class="bi bi-tags"></i> Company</a>
+                                            <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register"><i class="bi bi-tags"></i> Create User</a>
                                         </li>
                                   </ul>
                             </li>
                         }
-                        @if(IHttpContextAccessor.HttpContext.Session.GetInt32(SD.SessionCart) != null)
+                        @*@if(IHttpContextAccessor.HttpContext.Session.GetInt32(SD.SessionCart) != null)
                         {
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="Customer" asp-controller="Cart" asp-action="Index"><i class="bi bi-cart"></i>
                                     &nbsp; (@IHttpContextAccessor.HttpContext.Session.GetInt32(SD.SessionCart))
                                 </a>
                             </li>
-                        }
-                        else
-                        {
-                             <li class="nav-item">
-                                <a class="nav-link" asp-area="Customer" asp-controller="Cart" asp-action="Index"><i class="bi bi-cart"></i>
-                                    &nbsp; (0)
+                        }*@
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Customer" asp-controller="Cart" asp-action="Index">
+                                    @await Component.InvokeAsync("ShoppingCart")
                                 </a>
                             </li>
-                        }
                     </ul>
                         <partial name="_LoginPartial" />
                 </div>

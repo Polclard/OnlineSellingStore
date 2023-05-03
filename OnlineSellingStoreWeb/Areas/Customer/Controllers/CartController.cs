@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OnlineSellingStore.DataAccess.Repository;
 using OnlineSellingStore.DataAccess.Repository.IRepository;
 using OnlineSellingStore.Models;
 using OnlineSellingStore.Models.ViewModels;
@@ -193,7 +194,7 @@ namespace OnlineSellingStoreWeb.Areas.Customer.Controllers
                     _unitOfWork.OrderHeader.UpdateStatus(id, SD.StatusApproved, SD.PaymentStatusApproved);
                     _unitOfWork.Save();
                 }
-
+                HttpContext.Session.SetInt32(SD.SessionCart, 0);
 			}
 
             List<ShoppingCart> shoppingCarts =
@@ -231,6 +232,7 @@ namespace OnlineSellingStoreWeb.Areas.Customer.Controllers
                 _unitOfWork.ShoppingCart.Update(shoppingCartFromDb);
            }
             _unitOfWork.Save();
+            calculateItemsInShoppingCart();
             return Redirect(nameof(Index));
         }
 
@@ -238,11 +240,31 @@ namespace OnlineSellingStoreWeb.Areas.Customer.Controllers
         {
             var shoppingCartFromDb = _unitOfWork.ShoppingCart.Get(u => u.Id == cartId);
 
+
             //remove from Shopping Cart
             _unitOfWork.ShoppingCart.Remove(shoppingCartFromDb);
             _unitOfWork.Save();
-            
+
+
+            calculateItemsInShoppingCart();
+
             return Redirect(nameof(Index));
+        }
+
+        public void calculateItemsInShoppingCart()
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+
+            if (claimsIdentity.IsAuthenticated == true)
+            {
+                var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+                HttpContext.Session.SetInt32(SD.SessionCart,
+                    _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId).Count());
+            }
+            else
+            {
+                HttpContext.Session.SetInt32(SD.SessionCart, 0);
+            }
         }
 
         private double GetPriceBasedOnQuantity(ShoppingCart shoppingCart)

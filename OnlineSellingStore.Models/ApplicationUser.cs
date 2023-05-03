@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace OnlineSellingStore.Models
 {
+    [Table("AspNetUser")]
     public class ApplicationUser : IdentityUser
     {
         [Required]
