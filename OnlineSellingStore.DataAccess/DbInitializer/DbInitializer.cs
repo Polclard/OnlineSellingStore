@@ -48,7 +48,7 @@ namespace OnlineSellingStore.DataAccess.DbInitializer
             }
 
 
-            //2. Create roles if they are nt created
+            //2. Create roles if they are not created
             if (!_roleManager.RoleExistsAsync(SD.Role_Customer).GetAwaiter().GetResult())
             {
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Customer)).GetAwaiter().GetResult();
@@ -56,7 +56,7 @@ namespace OnlineSellingStore.DataAccess.DbInitializer
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Company)).GetAwaiter().GetResult();
 
-                //3. If roles are not created, then we wil create admin user as well
+                //3. If roles are not created, then we will create admin user as well
                 _userManager.CreateAsync(new ApplicationUser
                 {
                     UserName = "admin@polclardstore.com",
@@ -66,7 +66,8 @@ namespace OnlineSellingStore.DataAccess.DbInitializer
                     StreetAddress = "Test 222 Avenue",
                     State = "IL",
                     PostalCode = "21411",
-                    City = "Chicago"
+                    City = "Chicago",
+                    EmailConfirmed = true,
                 }, "Rokatamakata*23e").GetAwaiter().GetResult();
 
                 ApplicationUser user = _db.applicationUsers.FirstOrDefault(u => u.Email == "polclard@polclardstore.com");

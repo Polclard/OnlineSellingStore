@@ -36,7 +36,7 @@ namespace OnlineSellingStore.Models
         public DateTime PaymentDueDate { get; set; }
 
 
-
+        [Column]
         public string? SessionId { get; set; }
         public string? PaymentIntentId { get; set; }
 

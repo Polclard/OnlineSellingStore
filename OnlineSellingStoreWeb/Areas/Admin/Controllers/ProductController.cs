@@ -89,7 +89,7 @@ namespace OnlineSellingStoreWeb.Areas.Admin.Controllers
                     productVM.Product.ImageUrl = @"\images\product\" + fileName;
 
                 }
-                if(productVM.Product.Id == 0)
+                if(productVM.Product.Id == 0 || productVM.Product.Id == null)
                 {
                     _unitOfWork.Product.Add(productVM.Product);
                 }

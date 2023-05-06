@@ -29,18 +29,7 @@ namespace OnlineSellingStoreWeb.Areas.Admin.Controllers
         }
         public IActionResult Index()
 		{
-            List<OrderVM> orderVMFromDb = new List<OrderVM>();
-            foreach(var item in _unitOfWork.OrderHeader.GetAll())
-            {
-
-                OrderVM orderVM = new()
-                {
-                    OrderHeader = item,
-                    OrderDetail = _unitOfWork.OrderDetail.GetAll(u => u.OrderHeaderId == item.Id, includeProperties: "Product")
-                };
-                orderVMFromDb.Add(orderVM);
-            }
-			return View(orderVMFromDb);
+			return View();
 		}
 
 

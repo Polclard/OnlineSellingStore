@@ -167,6 +167,7 @@ namespace OnlineSellingStoreWeb.Areas.Identity.Pages.Account
                 user.State = Input.State;
                 user.PhoneNumber = Input.PhoneNumber;
 
+                user.CompanyId = null;
                 if(Input.Role == SD.Role_Company)
                 {
                     user.CompanyId = Input.CompanyId;

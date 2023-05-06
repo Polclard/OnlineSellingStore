@@ -17,7 +17,9 @@
     <div class="card-header bg-primary bg-gradient m-lg-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2">@(Model.Product.Id != 0 ? "Update" : "Create") Product</h2>
+                <h2 class="text-white py-2">
+                    @(Model.Product.Id != 0 && Model.Product.Id != null? "Update" : "Create") Product
+                </h2>
             </div>
         </div>
     </div>
@@ -90,7 +92,7 @@
 
                         <div class="row pt-2">
                             <div class="col-6 col-md-3">
-                                @if(Model.Product.Id != 0)
+                                @if(Model.Product.Id != 0 && Model.Product.Id != null)
                                 {
                                     <button type="submit" class="btn btn-primary form-control">
                                         Update
@@ -129,7 +131,7 @@
     <script>
     tinymce.init({
       selector: 'textarea',
-      plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tableofcontents footnotes mergetags autocorrect typography inlinecss',
+      plugins: '',
       toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
     });
   </script>
