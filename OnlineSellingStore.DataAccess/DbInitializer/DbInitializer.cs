@@ -68,7 +68,7 @@ namespace OnlineSellingStore.DataAccess.DbInitializer
                     PostalCode = "21411",
                     City = "Chicago",
                     EmailConfirmed = true,
-                }, "Rokatamakata*23e").GetAwaiter().GetResult();
+                }, "Admin123*").GetAwaiter().GetResult();
 
                 ApplicationUser user = _db.applicationUsers.FirstOrDefault(u => u.Email == "polclard@polclardstore.com");
                 _userManager.AddToRoleAsync(user, SD.Role_Admin).GetAwaiter().GetResult();
