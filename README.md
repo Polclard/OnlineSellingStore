@@ -13,12 +13,12 @@
   
   <p>- This application is about Online Selling Store for books (for now) and the main purpose is to be used for people such as 
     <ul>
-      <li>Customer</li>
+      <li>Customers</li>
       <li>Companies</li>
     </ul>
     for buying online books. It is simple to use and provides different functionalities so the user feels comfortable using the application. The companies also can buy products and pay later, as they have period to make the payment before the order is shipped.
   </p>
-  <p>- This WEB application also provides tables whih are easy to use and can help the user/admin to easily navigate the products, orders, users, categories etc. This is easily achievable by just simply searching trough the table or setting filters.</p>
+  <p>- This WEB application also provides tables which are easy to use and can help the user/admin to easily navigate the products, orders, users, categories etc. This is easily achievable by just simply searching trough the table or setting filters.</p>
 </div>
 
 <div id="how-to-run-the-application" style="text-align: justify">
@@ -59,7 +59,7 @@ After cloning or downloading the sample you should be able to run it using an In
 ---------------------------------------------------------------------------------------------------------------------------
 -Plus Section
   
-If you wish to use the project with a persistent database, you will need to run its Entity Framework Core **migrations** before you will be able to run the app, and update the ConfigureDatabases method in **Startup.cs** (see below).
+If you wish to use the project with a persistent database, you will need to run its Entity Framework Core **migrations** before you will be able to run the app, and update the ConfigureDatabases method in **Program.cs** (see below).
 
 ```csharp
 public void ConfigureDatabases(IServiceCollection services)
