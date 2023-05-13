@@ -1,7 +1,7 @@
 <h1 align="center">OnlineSellingStore</h1>
 
 
-1. [Short Description]("#short-description") :ledger:
+1. [Short Description]("https://github.com/Polclard/OnlineSellingStore/tree/master/#short-description") :ledger:
 2. [How to run the application]("#how-to-run-the-application") :running_man:
 3. [Resources]("#resources") :bookmark_tabs:
 4. [Techonlogies used in this project]("#techologies-used-in-this-project") :computer:
