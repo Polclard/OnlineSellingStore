@@ -2,9 +2,9 @@
 
 
 1. [Short Description](https://github.com/Polclard/OnlineSellingStore/tree/master/#short-description) :ledger:
-2. [How to run the application]("#how-to-run-the-application") :running_man:
-3. [Resources]("#resources") :bookmark_tabs:
-4. [Techonlogies used in this project]("#techologies-used-in-this-project") :computer:
+2. [How to run the application](https://github.com/Polclard/OnlineSellingStore/tree/master/#how-to-run-the-application) :running_man:
+3. [Resources](https://github.com/Polclard/OnlineSellingStore/tree/master/#resources) :bookmark_tabs:
+4. [Techonlogies used in this project](https://github.com/Polclard/OnlineSellingStore/tree/master/#techologies-used-in-this-project) :computer:
 
 
 <div id="short-description"  style="text-align: justify">
