@@ -8,12 +8,15 @@ using OnlineSellingStore.Utility;
 using OnlineSellingStore.Models;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Stripe;
+using MySql.Data;
 using OnlineSellingStore.DataAccess.DbInitializer;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -42,6 +45,41 @@ builder.Services.AddAuthentication().AddFacebook(options =>
 {
     options.AppId = "145202791716845";
     options.AppSecret = "b4a36de7c4613de7319438faada89277";
+});
+
+builder.Services.AddDbContext<ApplicationDbContext>(x =>
+{
+
+    var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+    string connStr;
+
+    if (env == "Development")
+    {
+        connStr = builder.Configuration.GetSection("Heroku").GetConnectionString("Key");
+    }
+    else
+    {
+        // Use connection string provided at runtime by Heroku.
+        var connUrl = Environment.GetEnvironmentVariable("CLEARDB_DATABASE_URL");
+
+        connUrl = connUrl.Replace("mysql://", string.Empty);
+        var userPassSide = connUrl.Split("@")[0];
+        var hostSide = connUrl.Split("@")[1];
+
+        var connUser = userPassSide.Split(":")[0];
+        var connPass = userPassSide.Split(":")[1];
+        var connHost = hostSide.Split("/")[0];
+        var connDb = hostSide.Split("/")[1].Split("?")[0];
+
+
+        connStr = $"server={connHost};Uid={connUser};Pwd={connPass};Database={connDb}";
+
+
+
+    }
+
+    x.UseSqlServer(connStr);
+
 });
 
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();

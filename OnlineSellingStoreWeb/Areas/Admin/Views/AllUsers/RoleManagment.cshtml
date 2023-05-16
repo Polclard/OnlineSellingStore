@@ -1,0 +1,82 @@
+﻿@model UserVM
+
+<script>
+    var realUserRole = @Model.user.Role;
+</script>
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-primary bg-gradient m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Manage User Roles</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <input hidden asp-for="@Model.user.Id"/>
+            <div class="border p-3">
+                <div class="form-floating py-2 col-12">
+                    <input readonly asp-for="@Model.user.Name" class="form-control border-0" style="background: rgba(0,0,0,0.1)" />
+                    <label asp-for="@Model.user.Name" class="ms-2"></label>
+                    <span asp-validation-for="@Model.user.Name" class="text-danger"></span>
+                </div>
+    
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="@Model.user.RoleId" asp-items="@Model.roles" class="form-select border-0 shadow" >
+                    
+                    </select>
+                    <label asp-for="@Model.user.RoleId" class="ms-2" ></label>
+                    <span asp-validation-for="@Model.user.RoleId" class="text-danger"></span>
+                </div> 
+                
+                @{
+                    var companyVisible = "display: none;";
+                }
+                @if(Model.user.Role == SD.Role_Company)
+                {
+                    companyVisible = "display: block;";
+                }
+
+                <div class="form-floating py-2 col-12" style="@companyVisible">
+                    <select asp-for="@Model.user.CompanyId"  asp-items="@Model.companies" class="form-select border-0 shadow" >
+
+                    </select>
+                    <label asp-for="@Model.user.CompanyId" class="ms-2" ></label>
+                    <span asp-validation-for="@Model.user.CompanyId" class="text-danger"></span>
+                </div>
+
+                <div class="row pt-2 mt-2">
+                     <div class="col-6 col-md-3 d-inline">
+                        <button type="submit" class="btn border btn-primary form-control">Save Changes</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="AllUsers" asp-action="Index" class="btn border btn-outline-primary form-control">Back to List</a>
+                    </div>
+                </div>
+
+  
+            </div>
+        </form>
+    </div>
+    <asp:HiddenField id="example" runat="server"></asp:HiddenField>
+</div>
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function (){
+            $('#user_RoleId').change(function(){
+                var selection = $('#user_RoleId Option:Selected').text();
+                if(selection == 'Company'){
+                    $("#user_CompanyId").parent().slideToggle();
+                }
+                else
+                {
+                    $("#user_CompanyId").parent().slideUp();
+                }
+            })
+        })
+    </script>
+}

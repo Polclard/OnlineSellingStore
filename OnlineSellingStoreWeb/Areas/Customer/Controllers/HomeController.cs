@@ -25,7 +25,7 @@ namespace OnlineSellingStoreWeb.Areas.Customer.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Product> productsList = _unitofWork.Product.GetAll(includeProperties: "Category");
+            IEnumerable<Product> productsList = _unitofWork.Product.GetAll(includeProperties: "Category,ProductImages");
 
             calculateItemsInShoppingCart();
 
@@ -36,7 +36,7 @@ namespace OnlineSellingStoreWeb.Areas.Customer.Controllers
         {
             ShoppingCart cart = new()
             {
-                Product = _unitofWork.Product.Get(u => u.Id == id, includeProperties: "Category"),
+                Product = _unitofWork.Product.Get(u => u.Id == id, includeProperties: "Category,ProductImages"),
                 Count = 1,
                 ProductId = id
             };

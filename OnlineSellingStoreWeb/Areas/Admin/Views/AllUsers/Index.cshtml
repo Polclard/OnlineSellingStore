@@ -1,0 +1,57 @@
+﻿@model List<ApplicationUser>
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-primary bg-gradient m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">All Users</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="container">
+    <div class="row pt-4 pb-4">
+        <div class="col-12" style="text-align:right;">
+             <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register"><i class="bi bi-tags"></i> Create User</a>
+        </div>
+    </div>
+
+    <div style="overflow-x:auto;" class="pb-4">
+         <table id="tblData" class="table table-primary table-bordered table-striped table-hover w-100 pt-2">
+        <thead>
+            <tr>
+                <th>
+                     Name
+                </th>
+                <th>
+                     Email
+                </th>
+                <th>
+                    Phone Number
+                </th>
+               <th>
+                    User State
+                </th>
+                <th>
+                    Company
+                </th>
+                <th>
+                     Role
+                </th>
+                <th>
+                    Functionality
+                </th>
+            </tr>
+        </thead>
+ 
+    </table>
+    </div>
+   
+</div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/js/allusers.js"></script>
+}
