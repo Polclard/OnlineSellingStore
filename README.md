@@ -31,7 +31,7 @@ You will need the following tools:
 
 * [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/)
 * [.Net Core 7.0 or later](https://dotnet.microsoft.com/download/dotnet-core/2.2](https://dotnet.microsoft.com/en-us/download/dotnet/7.0))
-* EF Core 
+* [EF Core](https://learn.microsoft.com/en-us/ef/core/get-started/overview/install) 
 
 ### Installing
 Follow these steps to get your development environment set up:
