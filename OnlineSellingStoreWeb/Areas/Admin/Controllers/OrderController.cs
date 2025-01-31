@@ -64,7 +64,7 @@ namespace OnlineSellingStoreWeb.Areas.Admin.Controllers
             }
             if(!string.IsNullOrEmpty(OrderVM.OrderHeader.TrackingNumber))
             {
-                orderHeaderFromDb.Carrier = OrderVM.OrderHeader.TrackingNumber; 
+                orderHeaderFromDb.TrackingNumber = OrderVM.OrderHeader.TrackingNumber; 
             }
 
             _unitOfWork.OrderHeader.Update(orderHeaderFromDb);
