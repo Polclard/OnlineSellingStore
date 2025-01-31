@@ -129,7 +129,7 @@ namespace OnlineSellingStoreWeb.Areas.Admin.Controllers
                 .GetAll(u => u.OrderHeader.Id == OrderVM.OrderHeader.Id, includeProperties: "Product");
 
 
-            var domain = "https://localhost:7113/";
+            var domain = Request.Scheme+"://"+Request.Host.Value+"/";
 
             var options = new SessionCreateOptions
             {

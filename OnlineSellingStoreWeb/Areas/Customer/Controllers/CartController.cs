@@ -139,7 +139,7 @@ namespace OnlineSellingStoreWeb.Areas.Customer.Controllers
                 //It is a regular Customer account and we need to capture payment
                 //Stripe logic
 
-                var domain = "https://localhost:44379/";
+                var domain = Request.Scheme+"://"+Request.Host.Value+"/";
 
 				var options = new SessionCreateOptions
 				{
