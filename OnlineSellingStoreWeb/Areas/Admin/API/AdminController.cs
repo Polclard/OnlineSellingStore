@@ -24,7 +24,7 @@ namespace OnlineSellingStoreWeb.Areas.Admin.API
         [HttpGet("[action]")]
         public List<Product> GetAllProducts()
         {
-            return _context.Products.Include("ProductImages").ToList();
+            return _context.Products.Include("Category").Include("ProductImages").ToList();
         }
     }
 }
