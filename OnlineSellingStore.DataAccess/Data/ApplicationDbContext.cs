@@ -2,6 +2,7 @@
 using OnlineSellingStore.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using OnlineSellingStore.Models.FriendShop;
 
 namespace OnlineSellingStore.DataAccess.Data
 {
@@ -19,11 +20,16 @@ namespace OnlineSellingStore.DataAccess.Data
         public DbSet<OrderHeader> OrderHeaders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<FriendBook> FriendBooks { get; set; }
+        public DbSet<FriendAuthor> FriendAuthors { get; set; }
+        public DbSet<FriendPublisher> FriendPublishers { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             base.OnModelCreating(modelBuilder);
+
 
             //modelBuilder.Entity<Category>().HasData(
             //    new Category { Id = 1, Name = "Action", DisplayOrder = 1 },

@@ -1,0 +1,36 @@
+﻿@model List<OnlineSellingStore.Models.FriendShop.FriendBook>
+
+@{
+    ViewData["Title"] = "Friend Shop Books";
+}
+
+<h2 class="text-center my-4">Friend Shop Books</h2>
+
+<div class="container">
+    <div class="row">
+        @foreach (var book in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <img src="@book.BookImage" class="card-img-top" alt="Book Image" style="height: 300px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">@book.BookName</h5>
+                        <p class="card-text"><strong>Description:</strong> @book.BookDescription</p>
+                        <p class="card-text"><strong>Price:</strong> $@book.Price</p>
+                        <p class="card-text"><strong>Rating:</strong> ⭐ @book.Rating / 5</p>
+
+                        <p class="card-text"><strong>Authors:</strong></p>
+                        <ul>
+                            @foreach (var author in book.Authors)
+                            {
+                                <li>@author.AuthorName</li>
+                            }
+                        </ul>
+
+                        <p class="card-text"><strong>Publisher:</strong> @book.Publisher.PublisherName (@book.Publisher.Address)</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

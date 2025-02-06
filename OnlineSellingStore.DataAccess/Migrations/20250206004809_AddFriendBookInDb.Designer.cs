@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineSellingStore.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using OnlineSellingStore.DataAccess.Data;
 namespace OnlineSellingStore.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250206004809_AddFriendBookInDb")]
+    partial class AddFriendBookInDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -285,11 +288,11 @@ namespace OnlineSellingStore.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AuthorName")
+                    b.Property<string>("FriendAuthorBio")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Bio")
+                    b.Property<string>("FriendAuthorName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -321,18 +324,18 @@ namespace OnlineSellingStore.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("FriendPublisherId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<Guid>("PublisherId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Rating")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PublisherId");
+                    b.HasIndex("FriendPublisherId");
 
                     b.ToTable("FriendBooks");
                 });
@@ -732,19 +735,19 @@ namespace OnlineSellingStore.DataAccess.Migrations
             modelBuilder.Entity("OnlineSellingStore.Models.FriendShop.FriendAuthor", b =>
                 {
                     b.HasOne("OnlineSellingStore.Models.FriendShop.FriendBook", null)
-                        .WithMany("Authors")
+                        .WithMany("FriendAuthors")
                         .HasForeignKey("FriendBookId");
                 });
 
             modelBuilder.Entity("OnlineSellingStore.Models.FriendShop.FriendBook", b =>
                 {
-                    b.HasOne("OnlineSellingStore.Models.FriendShop.FriendPublisher", "Publisher")
+                    b.HasOne("OnlineSellingStore.Models.FriendShop.FriendPublisher", "FriendPublisher")
                         .WithMany()
-                        .HasForeignKey("PublisherId")
+                        .HasForeignKey("FriendPublisherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Publisher");
+                    b.Navigation("FriendPublisher");
                 });
 
             modelBuilder.Entity("OnlineSellingStore.Models.OrderDetail", b =>
@@ -835,7 +838,7 @@ namespace OnlineSellingStore.DataAccess.Migrations
 
             modelBuilder.Entity("OnlineSellingStore.Models.FriendShop.FriendBook", b =>
                 {
-                    b.Navigation("Authors");
+                    b.Navigation("FriendAuthors");
                 });
 
             modelBuilder.Entity("OnlineSellingStore.Models.Product", b =>
